@@ -15,7 +15,7 @@ export class FindTreeDataProvider implements vscode.TreeDataProvider<FindItem> {
 
 	public getTreeItem(findItem: FindItem): vscode.TreeItem {
 		var icon = 'file.svg';
-		if (findItem.uri.fsPath.endsWith('.pat')) {
+		if (findItem.uri.fsPath.endsWith('.nlp') || findItem.uri.fsPath.endsWith('.pat')) {
 			icon = 'gear.svg';
 		}
 
@@ -89,6 +89,9 @@ export class FindView {
 
 	public loadFinds(searchWord: string, findItems: FindItem[]) {
 		this.findItems = findItems;
+		if (findItems.length == 0) {
+			findItems.push({uri: vscode.Uri.file(''), label: 'NOT FOUND:  ' + searchWord, line: 0, pos: 0, text: ''});
+		}
 		this.searchWord = searchWord;
 	}
 
