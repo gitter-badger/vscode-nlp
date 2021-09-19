@@ -318,4 +318,42 @@ export class TextView {
 			});
 		}
 	}
+	
+	public getLogDirs(dir: vscode.Uri): Entry[] {
+		var logDirs = Array();
+		var entries = dirfuncs.getDirectoryTypes(dir);
+
+		for (let entry of entries) {
+			if (entry.type == vscode.FileType.Directory && outputView.directoryIsLog(entry.uri.fsPath)) {
+				logDirs.push(entry);
+			}
+		} 
+
+		return logDirs;
+	}
+
+	public removeLogDirs() {
+
+		vscode.window.withProgress({
+			location: vscode.ProgressLocation.Notification,
+			title: "Removing log directies",
+			cancellable: false
+		}, (progress, token) => {
+            token.onCancellationRequested(() => {
+                console.log("User canceled the long running operation");
+            });
+
+			return new Promise(resolve => {
+				var logDirs = this.getLogDirs(visualText.getWorkspaceFolder());
+				var count = logDirs.length;
+				var i = 0;
+				var step = count / i;
+	
+				while (i < count) {
+					progress.report({ increment: step, message: "Removing log directories" });
+					i++;
+				}
+			});
+		});
+	}
 }
