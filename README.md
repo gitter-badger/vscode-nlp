@@ -1,5 +1,7 @@
 # nlp README
 
+[![Join the chat at https://gitter.im/nlpppp/VisualText](https://badges.gitter.im/nlpppp/VisualText.svg)](https://gitter.im/nlpppp/VisualText?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is the README for your extension "nlp". After writing up a brief description, we recommend including the following sections.
 
 ## Features
